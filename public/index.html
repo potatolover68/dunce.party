@@ -16,15 +16,18 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script>
-      try {
-        let norris = fetch('https://chucknorris.dunce.party').then((res) => {
-          norris = res.json();
-        })
-        console.log('norris')
-        document.getElementById('norris').innerText = norris['fact']
-      } catch (error) {
-        console.error('could not find chuck norris, aborting:', error)
-      }
+      document.addEventListener('DOMContentLoaded', function() {
+        fetch('https://chucknorris.dunce.party')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('chuck').innerText = data.fact;
+          })
+          .catch(error => {
+            console.error('Could not fetch Chuck Norris fact:', error);
+          });
+      });
+    </script>
+      
     </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
